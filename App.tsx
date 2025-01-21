@@ -1,12 +1,20 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { LoginList } from './Types/Type';
+import Splash from './Components/Splash';
+import StartScreen from './Components/StartScreen';
 
-const App = () => {
+const Stack = createStackNavigator<LoginList>();
+const App: React.FC = () => {
   return (
-    <View>
-      <Text>App</Text>
-    </View>
-  )
-}
+    <NavigationContainer>
+      <Stack.Navigator>
+      <Stack.Screen name="Splash" component={Splash} options={{ headerShown: false }} />
+        <Stack.Screen name="StartScreen" component={StartScreen} options={{ headerShown: false }} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
 
-export default App
+export default App;
