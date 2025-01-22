@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  //Start Screen  
+  //Splash Screen
   container: {
     alignItems: 'center',
   },
@@ -54,8 +54,8 @@ const styles = StyleSheet.create({
     color: 'white',
   },
 
-  //Login
-  login: {
+  //StartScreen
+  start: {
     backgroundColor: 'rgba(239, 104, 32, 0.99)',
     alignItems: 'center',
   },
@@ -75,16 +75,17 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   slideText: {
-    fontSize: 16,
+    fontSize: 25,
     fontWeight: 'bold',
-    color: '#333',
+    color: 'white',
     textAlign: 'center',
-    marginBottom: 10,
+    marginLeft: '15%',
+    marginRight: '15%',
   },
   dotContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: 20,
+    marginTop: 15,
   },
   dot: {
     width: 10,
@@ -93,11 +94,38 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
   },
   activeDot: {
-    backgroundColor: '#FF6347',
+    backgroundColor: 'rgba(255, 255, 255, 0.99)',
   },
   inactiveDot: {
-    backgroundColor: '#D3D3D3',
+    backgroundColor: 'rgba(228, 226, 225, 0.99)',
   },
+  loginscr: {
+    marginTop: 20,
+    width: 375,
+    backgroundColor: 'white',
+    borderRadius: 10,
+  },
+  txtloginscr: {
+    fontSize: 16,
+    textAlign: 'center',
+    padding: 15,
+    color: 'rgba(239, 104, 32, 0.99)',
+    fontWeight: 'bold',
+  },
+  registerscr: {
+    marginTop: 10,
+    width: 375,
+    borderWidth: 1.2,
+    borderColor: 'white',
+    borderRadius: 10,
+  },
+  textscr: {
+    fontSize: 16,
+    textAlign: 'center',
+    padding: 15,
+    color: 'rgba(255, 255, 255, 0.99)',
+  },
+
   
 });
 

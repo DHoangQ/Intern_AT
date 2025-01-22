@@ -9,7 +9,7 @@ const Splash: React.FC<{ navigation: any }> = ({ navigation }) => {
           <Image source={require('../assets/image/headimage.jpg')} style={styles.headimg} />
           <Image source={require('../assets/image/logo.png')} style={styles.logo} />
           <Text style={styles.texthead}> Thông điệp từ CEO ACCESSTRADE</Text>
-        </View>
+        </View> 
         <View>
           <Text style={styles.texts}>Các bạn thân mến,</Text>
           <Text  style={styles.texts}>Chúng ta đang sống trong kỷ nguyên của thiết bị 
