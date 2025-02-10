@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1029467969131",
+    "project_id": "accesstrade-c67d8",
+    "storage_bucket": "accesstrade-c67d8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1029467969131:android:aa6b967b25763e412d032e",
+        "android_client_info": {
+          "package_name": "com.accesstrade"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIcvQm2BYN734jvDW2TuVfWtdF6wPrhZc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

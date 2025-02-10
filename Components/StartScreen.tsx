@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Background } from '@react-navigation/elements';
 import styles from '../Styles/style';
  
-const StartScreen = () => {
+const StartScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
     const [activeSlide, setActiveSlide] = useState(0);
     const slides = [
       { id: 1, text: 'Kiếm 1 triệu dễ dàng chỉ với chiếc điện thoại' },
@@ -34,8 +34,8 @@ const StartScreen = () => {
             <View key={index} style={[styles.dot, activeSlide === index ? styles.activeDot : styles.inactiveDot,]}/>
             ))}
           </View>
-          <TouchableOpacity style={styles.loginscr}><Text style={styles.txtloginscr}>Đăng nhập</Text></TouchableOpacity>
-          <TouchableOpacity style={styles.registerscr}><Text style={styles.textscr}>Đăng ký tài khoản</Text></TouchableOpacity>
+          <TouchableOpacity style={styles.loginscr}><Text style={styles.txtloginscr} onPress={() => navigation.navigate('Login')}>Đăng nhập</Text></TouchableOpacity>
+          <TouchableOpacity style={styles.registerscr}><Text style={styles.textscr} onPress={() => navigation.navigate('Register')}>Đăng ký tài khoản</Text></TouchableOpacity>
           <TouchableOpacity><Text style={styles.textscr}>Tôi sẽ đăng nhập hoặc đăng ký sau</Text></TouchableOpacity>
           <TouchableOpacity><Text style={styles.textscr}>Tiếng Việt</Text></TouchableOpacity>
       </Background>
