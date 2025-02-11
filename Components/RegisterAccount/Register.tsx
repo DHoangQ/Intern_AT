@@ -9,13 +9,13 @@ import styles from '../../Styles/style';
 
 const Register: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [step, setStep] = useState(1);
-    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-    const [email, setemail] = useState<string>("");
-    const [midName, setmidName] = useState<string>("");
-    const [name, setname] = useState<string>("");
-    const [phone, setphone] = useState<string>("");
-    const [userName, setuserName] = useState<string>("");
-    const [passWord, setpassWord] = useState<string>("");
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [email, setemail] = useState<string>("");
+  const [midName, setmidName] = useState<string>("");
+  const [name, setname] = useState<string>("");
+  const [phone, setphone] = useState<string>("");
+  const [userName, setuserName] = useState<string>("");
+  const [passWord, setpassWord] = useState<string>("");
 
   const RegisAccount = async () => {
     try {

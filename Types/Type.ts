@@ -3,8 +3,12 @@ export type LoginList = {
     StartScreen: undefined;
     Login: undefined;
     Register: undefined;
-
+    ForgotPassWord: undefined;
+    BottomTabNavigator: undefined;
 }; 
-export type RegisterList = {
-    Register2: undefined;
-};
+export type BottomTabList = {
+    News: undefined;
+    Jobs: undefined;
+    Report: undefined;
+    Account: undefined;
+}; 

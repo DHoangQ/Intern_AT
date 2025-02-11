@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: 300,
     height: 200,
-    marginTop: '15%',
+    marginTop: '12%',
   },
   register: {
     alignItems: 'center',
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: 'grey',
+    borderColor: 'rgba(167, 160, 160, 0.48)',
     borderRadius: 8,
     paddingHorizontal: 13,
     width: '80%',
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: 'grey',
+    borderColor: 'rgba(167, 160, 160, 0.48)',
     borderRadius: 8,
     paddingHorizontal: 13,
     width: '60%',
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: 'grey',
+    borderColor: 'rgba(167, 160, 160, 0.48)',
     borderRadius: 8,
     paddingHorizontal: 8,
     width: '35%',
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(233, 132, 24, 0.99)',
     width: '80%',
     borderRadius: 10,
-    marginTop: 22,
+    marginTop: 10,
   },
   textregis: {
     textAlign: 'center',
@@ -236,6 +236,39 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
+  },
+
+  //Login
+  titleLogin: {
+    fontSize: 27, 
+    fontWeight: 'bold', 
+    marginTop: '43%',
+    textAlign: 'center',
+  },
+  btnauth: {
+    flexDirection: 'row',
+  },
+  googleIcon: {
+    width: 40,
+    height: 40,
+    borderRadius: 50,
+  },
+  loginauth: {
+    width: '39%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingLeft: '6%',
+    paddingRight: '6%',
+    borderWidth: 1,
+    borderColor: 'rgba(167, 160, 160, 0.48)',
+    borderRadius: 10,
+    margin: 8,
+  },
+  txtauth: {
+    fontSize: 18,
+    marginLeft: 10,
   },
 });
 
