@@ -20,6 +20,6 @@ const ForgotPassWord: React.FC<{ navigation: any }> = ({ navigation }) => {
             </TouchableOpacity>
         </View>
     </View>
-  )
+  ) 
 }
 export default ForgotPassWord

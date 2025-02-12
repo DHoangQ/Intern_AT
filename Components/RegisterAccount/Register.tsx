@@ -18,7 +18,7 @@ const Register: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [passWord, setpassWord] = useState<string>("");
 
   const RegisAccount = async () => {
-    try {
+    try { 
       await addDoc(collection(db, "account"), {
         email, midName, name, phone, userName, passWord
       });
