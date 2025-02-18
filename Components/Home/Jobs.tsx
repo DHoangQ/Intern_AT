@@ -8,5 +8,5 @@ const Jobs = () => {
     </View>
   )
 }
-
+ 
 export default Jobs

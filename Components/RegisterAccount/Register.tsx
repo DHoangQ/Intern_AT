@@ -21,10 +21,10 @@ const Register: React.FC<{ navigation: any }> = ({ navigation }) => {
     try { 
       await addDoc(collection(db, "account"), {
         email, midName, name, phone, userName, passWord
-      });
+      }); 
       console.log("Đăng ký thành công!");
     } catch (error) {
-      console.error("Lỗi khi đăng ký:", error);
+      console.error("Lỗi:", error);
     }
   };
 

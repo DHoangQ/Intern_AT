@@ -21,5 +21,5 @@ const ForgotPassWord: React.FC<{ navigation: any }> = ({ navigation }) => {
         </View>
     </View>
   ) 
-}
+} 
 export default ForgotPassWord
