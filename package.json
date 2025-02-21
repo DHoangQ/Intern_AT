@@ -16,9 +16,9 @@
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-native-fontawesome": "^0.3.2",
     "@react-native-async-storage/async-storage": "^2.1.0",
-    "@react-native-firebase/app": "^21.10.0",
-    "@react-native-firebase/auth": "^21.7.2",
-    "@react-native-firebase/firestore": "^21.7.4",
+    "@react-native-firebase/app": "^21.10.1",
+    "@react-native-firebase/auth": "^21.10.1",
+    "@react-native-firebase/firestore": "^21.10.1",
     "@react-native-firebase/storage": "^21.7.2",
     "@react-native-vector-icons/ionicons": "^7.4.0",
     "@react-navigation/bottom-tabs": "^7.2.0",
@@ -26,6 +26,7 @@
     "@react-navigation/material-top-tabs": "^7.1.0",
     "@react-navigation/native": "^7.0.14",
     "@react-navigation/stack": "^7.1.1",
+    "@reduxjs/toolkit": "^2.5.1",
     "firebase": "^11.3.1",
     "prop-types": "^15.8.1",
     "react": "18.3.1",
@@ -46,7 +47,9 @@
     "react-native-swiper": "^1.6.0",
     "react-native-tab-view": "^4.0.5",
     "react-native-vector-icons": "^10.2.0",
-    "react-native-webview": "^13.12.5"
+    "react-native-webview": "^13.12.5",
+    "react-redux": "^9.2.0",
+    "redux": "^5.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

@@ -276,6 +276,55 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 10,
   },  
+
+  //Account
+  WidthScroll: {
+    flexDirection: "row",
+    width: 'auto',
+    marginTop: '2%',
+  },
+  HeightScroll: {
+    flexGrow: 1,
+  },
+  Table: {
+    flexDirection: "row",
+    backgroundColor: "rgba(167, 160, 160, 0.48)",
+    paddingVertical: 10,
+    borderWidth: 1,
+    borderColor: "rgba(0, 0, 0, 0.74)",
+  },
+  cell: {
+    width: 180,
+    textAlign: "center",
+    fontSize: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 5,
+    borderRightWidth: 1,
+    borderColor: "rgba(167, 160, 160, 0.48)",
+  },
+  TableText: {
+    fontSize: 17,
+    fontWeight: "bold",
+  },
+  row: {
+    flexDirection: "row",
+    borderBottomWidth: 1,
+    borderColor: "rgba(86, 78, 78, 0.71)",
+    paddingVertical: 10,
+  },
+  ChangeAccount: {
+    backgroundColor: 'rgba(233, 132, 24, 0.99)',
+    width: '20%',
+    borderRadius: 10,
+    margin: 10,
+  },
+  ChangeAccounttxt: {
+    fontSize: 16,
+    textAlign: 'center',
+    padding: 1,
+    color: 'white',
+  },
+
 });
 
 export default styles;
