@@ -78,7 +78,7 @@ const Account = () => {
       fetchAccounts();
     } catch (error) {
       console.error("Lỗi:", error);
-    }
+    }   
   };
 
   return (
