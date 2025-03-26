@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, Image, TextInput } from "react-native";
 import styles from "../Styles/style";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -6,11 +6,32 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../Config/firebaseConfig";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+interface AccountData {
+  email: string;
+  passWord: string;
+  userName?: string;
+  avatar?: string;
+}
+
 const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
-  const [email, setEmail] = useState("");
-  const [passWord, setPassWord] = useState("");
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [passWord, setPassWord] = useState<string>("");
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        const userLoggedIn = await AsyncStorage.getItem("userLoggedIn");
+        if (userLoggedIn === "true") {
+          navigation.replace("BottomTabNavigator");
+        }
+      } catch (error) {
+        console.error("Lỗi khi kiểm tra trạng thái đăng nhập:", error);
+      }
+    };
+    checkLoginStatus();
+  }, [navigation]);
 
   const showError = (message: string) => {
     setErrorMessage(message);
@@ -33,9 +54,14 @@ const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
       }
 
       let isPasswordCorrect = false;
+      let accountId = "";
+      let userData: AccountData = {} as AccountData;
+
       querySnapshot.forEach((doc) => {
         if (doc.data().passWord === passWord) {
           isPasswordCorrect = true;
+          accountId = doc.id;
+          userData = doc.data() as AccountData;
         }
       });
 
@@ -45,12 +71,14 @@ const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
       }
 
       await AsyncStorage.setItem("userLoggedIn", "true");
+      await AsyncStorage.setItem("accountId", accountId);
+      await AsyncStorage.setItem("userData", JSON.stringify(userData));
 
+      setEmail("");
       setPassWord("");
       navigation.replace("BottomTabNavigator");
-
     } catch (error) {
-      console.error("Lỗi:", error);
+      console.error("Lỗi đăng nhập:", error);
       showError("Đăng nhập lỗi, hãy thử lại");
     }
   };
@@ -59,7 +87,7 @@ const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
     <View style={styles.register}>
       <View style={styles.container}>
         <TouchableOpacity onPress={() => navigation.navigate("StartScreen")}>
-          <Icon name="close-outline" size={40} style={{ marginRight: "85%", marginTop: "7%" }} color={"grey"} />
+          <Icon name="close-outline" size={40} style={{ marginRight: "85%", marginTop: "7%" }} color="grey" />
         </TouchableOpacity>
         <Image source={require("../assets/image/logo3.png")} style={styles.logo3} />
       </View>
@@ -68,15 +96,23 @@ const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
 
       <View style={styles.input}>
         <Icon name="person-outline" size={25} color="grey" />
-        <TextInput placeholder="Điện thoại/email/tên đăng nhập" style={{ fontSize: 18 }}
-        value={email} onChangeText={(text) => setEmail(text)}/>
+        <TextInput
+          placeholder="Điện thoại/email/tên đăng nhập"
+          style={{ fontSize: 18 }}
+          value={email}
+          onChangeText={(text: string) => setEmail(text)}
+        />
       </View>
 
       <View style={styles.input}>
         <Icon name="lock-closed-outline" size={25} color="grey" />
-        <TextInput placeholder="Mật khẩu" style={{ fontSize: 18, flex: 1 }}
+        <TextInput
+          placeholder="Mật khẩu"
+          style={{ fontSize: 18, flex: 1 }}
           secureTextEntry={!isPasswordVisible}
-          value={passWord} onChangeText={(text) => setPassWord(text)}/>
+          value={passWord}
+          onChangeText={(text: string) => setPassWord(text)}
+        />
         <TouchableOpacity onPress={() => setIsPasswordVisible(!isPasswordVisible)}>
           <Icon name={isPasswordVisible ? "eye-off-outline" : "eye-outline"} size={25} color="grey" />
         </TouchableOpacity>
@@ -96,8 +132,12 @@ const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
 
       <View style={styles.btnauth}>
         <TouchableOpacity style={styles.loginauth}>
-          <Image source={{ uri: "https://play-lh.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1" }}
-          style={styles.googleIcon}/>
+          <Image
+            source={{
+              uri: "https://play-lh.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1",
+            }}
+            style={styles.googleIcon}
+          />
           <Text style={styles.txtauth}>Google</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.loginauth}>
@@ -108,7 +148,7 @@ const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
 
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <View style={{ width: 80, height: 1, backgroundColor: "black" }} />
-        <Text style={{ margin:  10, fontSize: 17 }}>Bạn chưa có tài khoản?</Text>
+        <Text style={{ margin: 10, fontSize: 17 }}>Bạn chưa có tài khoản?</Text>
         <View style={{ width: 80, height: 1, backgroundColor: "black" }} />
       </View>
 

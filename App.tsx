@@ -4,6 +4,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 import { LoginList, BottomTabList } from "./Types/Type";
 import Splash from "./Components/Splash";
 import StartScreen from "./Components/StartScreen";
@@ -53,7 +55,7 @@ const BottomTabNavigator: React.FC = () => {
         },
         tabBarShowLabel: true,
         headerShown: false,
-      })}>
+      })}>        
       <Tab.Screen name="News" component={News} />
       <Tab.Screen name="Jobs" component={Jobs} />
       <Tab.Screen name="Report" component={Report} />
@@ -80,6 +82,8 @@ const HomeStack: React.FC = () => {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="BottomTabNavigator" component={BottomTabNavigator} />
       <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="StartScreen" component={StartScreen} />
+      <Stack.Screen name="Register" component={Register} />
     </Stack.Navigator>
   );
 };
@@ -100,10 +104,12 @@ const App: React.FC = () => {
   }
 
   return (
-    <NavigationContainer>
-      {isLoggedIn ? <HomeStack /> : <AuthStack />}
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        {isLoggedIn ? <HomeStack /> : <AuthStack />}
+      </NavigationContainer>
+    </Provider>
   );
 };
 
-export default App;
+export default App

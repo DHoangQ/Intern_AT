@@ -1,3 +1,4 @@
+import { relative } from 'path';
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -179,9 +180,10 @@ const styles = StyleSheet.create({
   },
   regisbutton: {
     backgroundColor: 'rgba(233, 132, 24, 0.99)',
-    width: '80%',
+    width: '40%',
     borderRadius: 10,
     marginTop: 10,
+    margin: 10,
   },
   textregis: {
     textAlign: 'center',
@@ -296,6 +298,7 @@ const styles = StyleSheet.create({
   cell: {
     width: 180,
     textAlign: "center",
+    alignItems: "center",
     fontSize: 16,
     paddingVertical: 8,
     paddingHorizontal: 5,
@@ -314,7 +317,7 @@ const styles = StyleSheet.create({
   },
   ChangeAccount: {
     backgroundColor: 'rgba(233, 132, 24, 0.99)',
-    width: '20%',
+    width: '40%',
     borderRadius: 10,
     margin: 10,
   },
@@ -325,6 +328,198 @@ const styles = StyleSheet.create({
     color: 'white',
   },
 
-});
+  //News
+  News: {
+    flex: 1,
+  },
+  headerNews: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    marginBottom: 3,
+    paddingBottom: 20,
+    paddingTop: 20,
+  },
+  logoNews: {
+    width: 60,
+    height: 40,
+    marginLeft: '3%',
+  },
+  headerNewstxt: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    marginLeft: 5,
+    marginTop: 4,
+  },
+  btnsearch: {
+    marginLeft: '32%',
+  },
+  iconNews1: {
+    fontSize: 32,
+    marginTop: 5,
+  },
+  btnplus: {
+    marginLeft: '2%',
+  },
+  iconNews2: {
+    color: 'rgba(233, 132, 24, 0.99)',
+    fontSize: 33,
+    marginTop: 5,
+  },
+  //CaseStudy
+  containercasestudy: {
+    flex: 1,
+    padding: 10,
+  },
+  cardcasestudy: {
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 15,
+    marginBottom: 15,
+    shadowColor: 'grey',
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 3,
+  },
+  imageCaseStudy: {
+    height: 400,
+    borderRadius: 10,
+    resizeMode: 'cover',
+  },
+  info: {
+    fontSize: 20,
+    marginTop: 5,
+  },
+  timecase: {
+    fontSize: 14,
+  },
+  description: {
+    fontSize: 17,
+    marginTop: 3,
+    marginBottom: 5,
+  },
+  statstudy: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: '2.5%',
+  },
+  iconcase: {
+    fontSize: 25,
+    marginTop: 3,
+  },
+  icontxts: {
+    fontSize: 23,
+  },
+  staticon: {
+    flexDirection: "row",
+  },
 
+  avatarImage: {
+    width: 55,
+    height: 55,
+    borderRadius: 20,
+    marginRight: 10,
+  },
+  avatarPlaceholder: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 10,
+  },
+  avatarInitial: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  userInfoContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  userTextInfo: {
+    flex: 1,
+  },
+  
+  bottomSheetContainer: {
+    flex: 1,
+    padding: 16,
+  },
+  commentInputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderTopWidth: 1,
+    borderTopColor: '#E0E0E0',
+    paddingTop: 10,
+  },
+  commentInput: {
+    flex: 1,
+    minHeight: 40,
+    maxHeight: 100,
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
+    borderRadius: 20,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    marginRight: 10,
+  },
+  sendCommentButton: {
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  // Comment Item Styles
+  commentItem: {
+    backgroundColor: '#F9F9F9',
+    borderRadius: 10,
+    padding: 12,
+    marginBottom: 10,
+  },
+  commentUserInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  commentAvatar: {
+    width: 35,
+    height: 35,
+    borderRadius: 17.5,
+    marginRight: 10,
+  },
+  commentAvatarPlaceholder: {
+    width: 35,
+    height: 35,
+    borderRadius: 17.5,
+    backgroundColor: '#E0E0E0',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 10,
+  },
+  commentAvatarInitial: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#666',
+  },
+  commentUserName: {
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  commentTime: {
+    fontSize: 12,
+    color: '#888',
+  },
+  commentContent: {
+    fontSize: 14,
+    color: '#333',
+  },
+  noCommentsText: {
+    textAlign: 'center',
+    color: '#888',
+    marginTop: 20,
+  },
+});
+  
 export default styles;

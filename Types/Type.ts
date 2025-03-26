@@ -12,3 +12,9 @@ export type BottomTabList = {
     Report: undefined;
     Account: undefined;
 }; 
+
+export type NewsScreens = {
+    All: undefined;
+    LearnMakeMoney: undefined;
+    CaseStudy: undefined;
+};
