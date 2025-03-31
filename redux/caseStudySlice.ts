@@ -1,6 +1,20 @@
 import {createSlice,createAsyncThunk,PayloadAction} from '@reduxjs/toolkit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {collection,onSnapshot,query,doc,getDoc,addDoc,deleteDoc,where,getDocs,updateDoc,increment,Timestamp} from 'firebase/firestore';
+import {
+    collection, 
+    onSnapshot, 
+    query, 
+    doc, 
+    getDoc, 
+    addDoc, 
+    deleteDoc, 
+    where, 
+    getDocs, 
+    updateDoc, 
+    increment, 
+    Timestamp, 
+    serverTimestamp
+} from 'firebase/firestore';
 import { db } from '../Config/firebaseConfig';
 
 export interface CaseStudyItem {
@@ -17,8 +31,18 @@ export interface CaseStudyItem {
     Share: number;
 }
 
+export interface CommentItem {
+    id: string;
+    accountId: string;
+    contentcomment: string;
+    timecomment: number; // Changed to number (seconds)
+    userName?: string;
+    avatar?: string;
+}
+
 interface CaseStudyState {
     casestudy: CaseStudyItem[];
+    comments: { [caseStudyId: string]: CommentItem[] };
     likedPosts: { [key: string]: boolean };
     currentUserId: string | null;
     loading: boolean;
@@ -27,10 +51,18 @@ interface CaseStudyState {
 
 const initialState: CaseStudyState = {
     casestudy: [],
+    comments: {},
     likedPosts: {},
     currentUserId: null,
     loading: false,
     error: null
+};
+
+const convertTimestamp = (timestamp: any) => {
+    if (timestamp && typeof timestamp.toDate === 'function') {
+        return timestamp.toDate().toISOString();
+    }
+    return null;
 };
 
 export const fetchCurrentUser = createAsyncThunk(
@@ -44,13 +76,6 @@ export const fetchCurrentUser = createAsyncThunk(
         }
     }
 );
-
-const convertTimestamp = (timestamp: any) => {
-    if (timestamp && typeof timestamp.toDate === 'function') {
-        return timestamp.toDate().toISOString();
-    }
-    return null;
-};
 
 export const fetchCaseStudies = createAsyncThunk(
     'casestudy/fetchCaseStudies',
@@ -162,6 +187,133 @@ export const handleLikeAction = createAsyncThunk(
     }
 );
 
+export const fetchComments = createAsyncThunk(
+    'casestudy/fetchComments',
+    async (caseStudyId: string, { rejectWithValue }) => {
+        try {
+            const commentsRef = collection(db, 'casestudy', caseStudyId, 'comments');
+            const q = query(commentsRef);
+
+            return new Promise<CommentItem[]>((resolve, reject) => {
+                const unsubscribe = onSnapshot(q, async (querySnapshot) => {
+                    try {
+                        const commentsData = await Promise.all(
+                            querySnapshot.docs.map(async (docSnapshot) => {
+                                const commentData = docSnapshot.data();
+                                let userName = "";
+                                let avatar = "";
+
+                                // Convert Firestore Timestamp to seconds
+                                const timecomment = commentData.timecomment 
+                                    ? commentData.timecomment.seconds 
+                                    : Math.floor(Date.now() / 1000);
+
+                                if (commentData.accountId) {
+                                    const accountDoc = await getDoc(doc(db, 'account', commentData.accountId));
+                                    if (accountDoc.exists()) {
+                                        const accountData = accountDoc.data();
+                                        userName = accountData.userName;
+                                        avatar = accountData.avatar || "";
+                                    }
+                                }
+                                return {
+                                    id: docSnapshot.id,
+                                    ...commentData,
+                                    timecomment, // Use seconds instead of Timestamp object
+                                    userName,
+                                    avatar,
+                                } as CommentItem;
+                            })
+                        );
+                        resolve(commentsData);
+                        unsubscribe();
+                    } catch (error) {
+                        reject(error);
+                    }
+                }, reject);
+            });
+        } catch (error) {
+            return rejectWithValue('Lỗi tải bình luận');
+        }
+    }
+);
+
+export const sendComment = createAsyncThunk(
+    'casestudy/sendComment',
+    async (
+        {
+            currentUserId, 
+            currentCaseStudyId, 
+            commentContent
+        }: {
+            currentUserId: string, 
+            currentCaseStudyId: string, 
+            commentContent: string
+        }, 
+        { rejectWithValue }
+    ) => {
+        try {
+            if (!currentUserId) {
+                throw new Error('Bạn chưa đăng nhập!');
+            }
+
+            if (!commentContent.trim()) {
+                throw new Error('Vui lòng nhập bình luận');
+            }
+
+            // Reference to the specific case study document
+            const caseStudyDocRef = doc(db, 'casestudy', currentCaseStudyId);
+
+            // Add comment to comments subcollection
+            const commentsRef = collection(db, 'casestudy', currentCaseStudyId, 'comments');
+            const newCommentRef = await addDoc(commentsRef, {
+                accountId: currentUserId,
+                contentcomment: commentContent.trim(),
+                timecomment: serverTimestamp()
+            });
+
+            // Increment the Comment count atomically
+            await updateDoc(caseStudyDocRef, {
+                Comment: increment(1)
+            });
+
+            // Fetch the newly added comment with user details
+            const newCommentDoc = await getDoc(newCommentRef);
+            const commentData = newCommentDoc.data();
+            
+            // Convert timestamp to seconds
+            const timecomment = commentData?.timecomment 
+                ? commentData.timecomment.seconds 
+                : Math.floor(Date.now() / 1000);
+
+            let userName = "";
+            let avatar = "";
+
+            if (commentData?.accountId) {
+                const accountDoc = await getDoc(doc(db, 'account', commentData.accountId));
+                if (accountDoc.exists()) {
+                    const accountData = accountDoc.data();
+                    userName = accountData.userName;
+                    avatar = accountData.avatar || "";
+                }
+            }
+
+            return {
+                caseStudyId: currentCaseStudyId,
+                comment: {
+                    id: newCommentRef.id,
+                    ...commentData,
+                    timecomment,
+                    userName,
+                    avatar,
+                } as CommentItem
+            };
+        } catch (error) {
+            return rejectWithValue(error instanceof Error ? error.message : 'Lỗi khi gửi bình luận');
+        }
+    }
+);
+
 const caseStudySlice = createSlice({
     name: 'casestudy',
     initialState,
@@ -189,6 +341,29 @@ const caseStudySlice = createSlice({
                 state.casestudy[caseStudyIndex].Like += likeCount;
             }
             state.likedPosts[caseStudyId] = liked;
+        });
+        
+        // New reducers for comments
+        builder.addCase(fetchComments.fulfilled, (state, action) => {
+            state.comments[action.meta.arg] = action.payload;
+        });
+
+        builder.addCase(sendComment.fulfilled, (state, action) => {
+            const { caseStudyId, comment } = action.payload;
+            if (!state.comments[caseStudyId]) {
+                state.comments[caseStudyId] = [];
+            }
+            state.comments[caseStudyId].push(comment);
+
+            // Update comment count in casestudy array
+            const caseStudyIndex = state.casestudy.findIndex(item => item.id === caseStudyId);
+            if (caseStudyIndex !== -1) {
+                state.casestudy[caseStudyIndex].Comment += 1;
+            }
+        });
+
+        builder.addCase(sendComment.rejected, (state, action) => {
+            state.error = action.payload as string;
         });
     }
 });

@@ -442,83 +442,75 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   
-  bottomSheetContainer: {
-    flex: 1,
+  modalContainer2: {
     padding: 16,
-  },
-  commentInputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderTopWidth: 1,
-    borderTopColor: '#E0E0E0',
-    paddingTop: 10,
-  },
-  commentInput: {
     flex: 1,
-    minHeight: 40,
-    maxHeight: 100,
-    borderWidth: 1,
-    borderColor: '#E0E0E0',
-    borderRadius: 20,
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    marginRight: 10,
   },
-  sendCommentButton: {
-    width: 40,
-    height: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  // Comment Item Styles
-  commentItem: {
-    backgroundColor: '#F9F9F9',
-    borderRadius: 10,
-    padding: 12,
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
     marginBottom: 10,
   },
-  commentUserInfo: {
+  commentListContainer: {
+    flex: 1,
+    height: 480,
+  },
+  commentItem: {
+    marginBottom: 10,
+    borderBottomWidth: 1,
+    borderColor: '#ddd',
+    paddingBottom: 10,
+  },
+  commentHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 8,
+    justifyContent: 'space-between',
+  },
+  commentUserContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   commentAvatar: {
-    width: 35,
-    height: 35,
-    borderRadius: 17.5,
+    width: 30,
+    height: 30,
+    borderRadius: 15,
     marginRight: 10,
   },
   commentAvatarPlaceholder: {
-    width: 35,
-    height: 35,
-    borderRadius: 17.5,
-    backgroundColor: '#E0E0E0',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: '#ccc',
     marginRight: 10,
-  },
-  commentAvatarInitial: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#666',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   commentUserName: {
-    fontSize: 14,
-    fontWeight: '600',
+    fontWeight: 'bold',
   },
   commentTime: {
+    color: '#888',
     fontSize: 12,
-    color: '#888',
   },
-  commentContent: {
-    fontSize: 14,
-    color: '#333',
+  commentText: {
+    marginTop: 5,
   },
-  noCommentsText: {
-    textAlign: 'center',
-    color: '#888',
-    marginTop: 20,
+  commentInputContainer: {
+    flexDirection: 'row', 
+    alignItems: 'center',
+    marginTop: 10, 
+    borderTopWidth: 1, 
+    borderColor: '#ddd', 
+    paddingTop: 10,
+  },
+  commentInput: {
+    flex: 1, 
+    borderWidth: 1, 
+    borderColor: '#ddd', 
+    borderRadius: 20, 
+    paddingHorizontal: 15,
+    marginRight: 10,
+    height: 40,
   },
 });
   

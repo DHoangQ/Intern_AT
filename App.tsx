@@ -52,7 +52,7 @@ const BottomTabNavigator: React.FC = () => {
         },
         tabBarLabelStyle: {
           fontSize: 13,
-        },
+        }, 
         tabBarShowLabel: true,
         headerShown: false,
       })}>        

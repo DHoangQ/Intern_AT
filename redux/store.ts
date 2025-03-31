@@ -3,7 +3,6 @@ import {persistStore, persistReducer,FLUSH,REHYDRATE,PAUSE,PERSIST,PURGE,REGISTE
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import accountReducer from './accountSlice';
 import caseStudyReducer from './caseStudySlice';
-
 export const store = configureStore({
     reducer: {
         account: accountReducer,
@@ -21,7 +20,7 @@ const persistConfig = {
     key: 'root',
     version: 1,
     storage: AsyncStorage,
-    whitelist: ['caseStudy']
+    whitelist: ['caseStudy', 'comments']
 };
 const persistedReducer = persistReducer(persistConfig, caseStudyReducer);
 export const persistor = persistStore(store);
